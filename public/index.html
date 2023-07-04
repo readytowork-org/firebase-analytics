@@ -4,25 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Welcome to Firebase Hosting</title>
-
-  <!-- update the version number as needed -->
-  <script defer src="/__/firebase/9.23.0/firebase-app-compat.js"></script>
-  <!-- include only the Firebase features as you need -->
-  <script defer src="/__/firebase/9.23.0/firebase-auth-compat.js"></script>
-  <script defer src="/__/firebase/9.23.0/firebase-database-compat.js"></script>
-  <script defer src="/__/firebase/9.23.0/firebase-firestore-compat.js"></script>
-  <script defer src="/__/firebase/9.23.0/firebase-functions-compat.js"></script>
-  <script defer src="/__/firebase/9.23.0/firebase-messaging-compat.js"></script>
-  <script defer src="/__/firebase/9.23.0/firebase-storage-compat.js"></script>
-  <script defer src="/__/firebase/9.23.0/firebase-analytics-compat.js"></script>
-  <script defer src="/__/firebase/9.23.0/firebase-remote-config-compat.js"></script>
-  <script defer src="/__/firebase/9.23.0/firebase-performance-compat.js"></script>
-  <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-  <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+  <title>Welcome to Firebase Analytics</title>
   <link rel="stylesheet" type="text/css" href="./style/style.css">
 </head>
 
@@ -31,7 +13,7 @@
     <div class="nav-container">
       <div class="logo">Logo</div>
       <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
+        <li><a href="/">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
@@ -41,6 +23,20 @@
     <h1>Home</h1>
   </div>
 </body>
-<script defer="./script/app.js"></script>
-
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics.js";
+  const firebaseConfig = {
+    apiKey: "AIzaSyDOmez9HXtqrqXCbMV_Y0Lb0y75zjUIgqY",
+    authDomain: "fb-analytics-31f94.firebaseapp.com",
+    projectId: "fb-analytics-31f94",
+    storageBucket: "fb-analytics-31f94.appspot.com",
+    messagingSenderId: "856047504062",
+    appId: "1:856047504062:web:24a33ce217456231ad2cef",
+    measurementId: "G-Z67RX1EYKH"
+  };
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  console.log("loaded")
+</script>
 </html>
