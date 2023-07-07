@@ -28,11 +28,18 @@
 
         <button class="Submit">Submit</button>
       </form>
+      <div class="logoutContainer">
+        <h3>Logged in</h3>
+        <button class="Logout">Logout</button>
+      </div>
     </div>
   </body>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-analytics.js"
+    import {
+      getAnalytics,
+      logEvent,
+    } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-analytics.js"
     import {
       getAuth,
       signInWithEmailAndPassword,
@@ -49,7 +56,17 @@
     const app = initializeApp(firebaseConfig)
     const analytics = getAnalytics(app)
     const submitButton = document.querySelector(".Submit")
+    const logoutButton = document.querySelector(".logoutContainer")
+    const form = document.querySelector(".form")
     submitButton.addEventListener("click", login)
+
+    const accessToken = localStorage.getItem("accessToken")
+    if (accessToken) {
+      form.style.display = "none" // Hide the form
+      logoutButton.style.display = "flex" // Show the logout button
+    } else {
+      submitButton.addEventListener("click", login)
+    }
 
     async function login(e) {
       const auth = getAuth()
@@ -70,9 +87,15 @@
         )
         const user = userCredential.user
         console.log("User logged in:", user)
-        const method = userCredential.operationType 
+
+        localStorage.setItem("accessToken", user.accessToken)
+
+        const method = userCredential.operationType
         console.log("Sign-in method:", method)
-        analytics.logEvent("login", { method })
+        logEvent(analytics, "custom_event", { method: "email-password" })
+
+        form.style.display = "none" //
+        logoutButton.style.display = "block"
       } catch (error) {
         const errorCode = error.code
         const errorMessage = error.message

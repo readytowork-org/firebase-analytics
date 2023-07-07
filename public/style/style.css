@@ -68,6 +68,12 @@ nav {
     margin: 0 auto;
     max-width: 400px;
   }
+  .logoutContainer{
+    display: none;
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 400px;
+  }
   label{
     margin-bottom: 10px;
   }
